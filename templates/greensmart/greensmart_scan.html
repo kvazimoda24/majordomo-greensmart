@@ -1,0 +1,47 @@
+<!-- Table greensmart scan -->
+[#if BRDCST_ERR#]
+<div class="alert alert-danger">Не установлен Broadcast IP</div>
+[#endif BRDCST_ERR#]
+[#if RESULT#]
+<legend>Наденные устройства</legend>
+<table  align=center class="table table-striped">
+<tbody>
+<tr>
+ <th><#LANG_TITLE#></th><th>MAC</th><th>IP</th><th>Key</th><th></th>
+</tr>
+[#begin RESULT#]
+<tr>
+ <td>[#NAME#]</td>
+ <td>[#MAC#]</td>
+ <td>[#IP#]</td>
+ <td>[#SECRETKEY#]</td>
+ <td width="1%" nowrap>
+  <div>
+  [#if "<#ACTION#>"=="admin"#]
+   <form action="?" method="post" enctype="multipart/form-data" class="form-horizontal">
+    <input id="name" name="name" value="[#NAME#]" type="hidden" class="form-control">
+    <input id="mac" name="mac" value="[#MAC#]" type="hidden" class="form-control">
+    <input id="ip" name="ip" value="[#IP#]" type="hidden" class="form-control">
+    <input id="key" name="secretkey" value="[#SECRETKEY#]" type="hidden" class="form-control">
+    <input type="hidden" name="id" value="">
+    <input type="hidden" name="view_mode" value="greensmart_edit">
+    <input type="hidden" name="edit_mode" value="">
+    <input type="hidden" name="mode" value="new">
+
+    <button type="submit" name="subm" value="New" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
+   </form>
+  [#endif ACTION#]
+  </div>
+ </td>
+<tr>
+[#end RESULT#]
+</tbody>
+</table>
+[#else RESULT#]
+<p>
+<font color="red">Устройств не найдено</font>
+</p>
+[#endif RESULT#]
+<div class="col-lg-offset-3 col-lg-4">
+<a href="?" class="btn btn-default "><#LANG_BACK#></a>
+</div>

@@ -1,0 +1,73 @@
+<!-- table greensmart prop -->
+<!-- prop results (list) -->
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit" class="form-horizontal">
+[#if OK#]
+<div class="alert alert-success"><#LANG_DATA_SAVED#></div>
+[#endif OK#]
+[#if ERR#]
+<div class="alert alert-danger"><#LANG_FILLOUT_REQURED#></div>
+[#endif ERR#]
+<fieldset>
+<table  align=center class="table table-striped">
+<tbody>
+<tr>
+ <th><#LANG_NAME#></th>
+ <th><#LANG_VALUE#></th>
+ <th><#LANG_LINKED_OBJECT#></th>
+ <th><#LANG_LINKED_PROPERTY#></th>
+ <th></th>
+</tr>
+[#begin RESULT#]
+<tr>
+ <td>
+  <b>[#NAME#]</b>
+ </td>
+ <td>
+  [#if VALUE!=""#]
+   [#VALUE#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td valign="top"><input type="text" name="linked_object[#PROP_ID#]" id="linked_object[#PROP_ID#]" value="[#LINKED_OBJECT#]"></td>
+ <td valign="top"><input type="text" name="linked_property[#PROP_ID#]" id="linked_property[#PROP_ID#]" value="[#LINKED_PROPERTY#]"></td>
+[#module name="linkedobject" object_field="linked_object<#RESULT.PROP_ID#>" property_field="linked_property<#RESULT.PROP_ID#>"#]
+ <td width="1%" nowrap>
+  <div>
+  [#if "<#ACTION#>"=="admin"#]
+<!--   <a href="?view_mode=greensmart_edit&tab=prop&id=[#ID#]" class="btn btn-default" title="Test"><i class="glyphicon glyphicon-flash"></i></a> -->
+   <a href="?view_mode=greensmart_edit&tab=data&id=[#ID#]&del_prop=[#PROP_ID#]" onClick="return confirm('Are you sure? Please confirm.')" class="btn btn-default" title="Delete"><i class="glyphicon glyphicon-remove"></i></a>
+  [#endif ACTION#]
+  </div>
+ </td>
+</tr>
+[#end RESULT#]
+</tbody>
+</table>
+<!-- / prop results (list) -->
+<div class="form-group[#if ERR_NTITLE#] has-error[#endif#]">
+ <label for="ip" class="col-lg-3 control-label">
+  <#LANG_ADD#>:
+ </label>
+ <div class="col-lg-9"><input type="text" name="title_new" value=""></div>
+</div>
+<br>
+<div class="form-group">
+<div class="col-lg-offset-3 col-lg-4">
+[#if RESULT#]
+ <button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_SUBMIT#></button>
+[#else RESULT#]
+ <button type="submit" name="subm" value="Add" class="btn btn-primary"><#LANG_ADD#></button>
+[#endif RESULT#]
+ <a href="?data_source=<#DATA_SOURCE#>" class="btn btn-default "><#LANG_CANCEL#></a>
+</div>
+</div>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="tab" value="<#TAB#>">
+</fieldset>
+</form>
+<!-- / table greensmart prop -->

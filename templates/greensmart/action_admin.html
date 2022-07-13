@@ -1,0 +1,68 @@
+<!-- table greensmart search -->
+<div>
+ [ <a href="#" onClick="$('#api_settings').toggle();return false;"><#LANG_SETUP#></a> ]
+</div>
+<div style="display:none" id='api_settings'>
+&nbsp;
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit" class="form-horizontal">
+<fieldset>
+<div class="form-group">
+ <label class="control-label"[#if ERR_UPDATE_INTERVAL#] style="color:red;font-weight:bold"[#endif#]>
+ Update interval:
+ (*)
+ </label>
+ <div class="controls"><input type="text" name="update_interval" value="[#UPDATE_INTERVAL#]" class="input"></div>
+</div>
+<div class="form-group">
+ <label class="control-label"[#if ERR_BROADCAST_IP#] style="color:red;font-weight:bold"[#endif#]>
+ Broadcast IP:
+ (*)
+ </label>
+ <div class="controls"><input type="text" name="broadcast_ip" value="[#BROADCAST_IP#]" class="input"></div>
+</div>
+<div class="form-group">
+ <label class="control-label"[#if ERR_GENERIC_KEY#] style="color:red;font-weight:bold"[#endif#]>
+ GENERIC KEY:
+ </label>
+ <div class="controls"><input type="text" name="generic_key" value="[#GENERIC_KEY#]" class="input"></div>
+</div>
+<div class="form-actions">
+<button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_UPDATE#></button>
+<input type="hidden" name="view_mode" value="update_settings">
+<input type="hidden" name="mode" value="update">
+</div>
+</fieldset>
+</form>
+</div>
+ <!-- table greensmart edit -->
+ [#if VIEW_MODE="greensmart_edit"#]
+   [#if ID!=""#]
+   [#if TITLE!=""#]<h4>[#TITLE#]</h4>[#endif TITLE#]
+<ul class="nav nav-tabs">
+  <li[#if TAB=""#] class="active"[#endif#]>
+   <a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&id=<#ID#>&tab="><#LANG_GENERAL#></a>
+  </li>
+  <li[#if TAB="data"#] class="active"[#endif#]>
+   <a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=data">Данные</a>
+  </li>
+</ul>
+&nbsp;<br/>
+   [#endif ID#]
+   [#if TAB=""#]
+    [#inc greensmart_dev.html#]
+   [#endif TAB#]
+   [#if TAB="data"#]
+    [#inc greensmart_prop.html#]
+   [#endif TAB#]
+ [#endif VIEW_MODE#]
+ <!-- action usual -->
+ <!-- table greensmart search -->
+ [#if VIEW_MODE="greensmart_search" || VIEW_MODE=""#]
+  [#inc greensmart_search.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table greensmart search -->
+ <!-- table greensmart scan -->
+ [#if VIEW_MODE="greensmart_scan"#]
+  [#inc greensmart_scan.html#]
+ [#endif VIEW_MODE#]
+ <!-- / table greensmart search -->
