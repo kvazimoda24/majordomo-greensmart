@@ -17,6 +17,8 @@ $latest_poll=0;
 $latest_check=0;
 $scriptEveryCheck=30;
 $pollEvery=$greensmart_module->config['UPDATE_INTERVAL'];
+
+setGlobal(str_replace('.php', '', basename(__FILE__)).'Run', time(), 1);
 $cycleVarName='ThisComputer.'.str_replace('.php', '', basename(__FILE__)).'Run';
 
 pcntl_signal(SIGHUP, [$greensmart_module, 'needReloadLinkedObj']);
@@ -35,7 +37,7 @@ while (1) {
 	}
 	if (time()-$latest_check > $scriptEveryCheck) {
 		$latest_check=time();
-		setGlobal($cycleVarName, time(), 1);
+		setGlobal(str_replace('.php', '', basename(__FILE__)).'Run', time(), 1);
 	}
 	if (time()-$latest_poll > $pollEvery) {
 		$latest_poll=time();
